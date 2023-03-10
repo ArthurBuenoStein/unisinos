@@ -13,6 +13,7 @@ public class Arvore {
         this.ele = ele;
         this.dir = null;
         this.esq = null;
+        // System.out.println("Criei a Árvore com o elemento "+ele.getValor());
     }
 
     // métodos de controle;
@@ -26,13 +27,56 @@ public class Arvore {
         }
         else{
             Arvore novaArvore = new Arvore(novo);
-            if (novo.getValor() < this.ele.getValor()){ // inserir na esquerda
-                if (this.esq == null){ // nó folha
+            if (novo.getValor() < this.ele.getValor()){ // vou inserir na descendência esquerda
+                if (this.esq == null){ // sou um nó folha?
                     this.esq = novaArvore;
+                    // System.out.println("Inseri o elemento "+ novo.getValor() + " à esquerda de "+ this.ele.getValor());
+                }
+                else{
+                    this.esq.inserir(novo); // responsabilidade para sub-árvore esquerda
+                }
+            }
+            else if (novo.getValor() > this.ele.getValor()){ // inserir na descendência direita
+                if (this.dir == null){ // sou um nó folha?
+                    this.dir = novaArvore;
+                    // System.out.println("Inseri o elemento "+ novo.getValor() + " à direita de "+ this.ele.getValor());
+                }
+                else{
+                    this.dir.inserir(novo);
                 }
             }
         }
     }
+
+    public boolean busca(int valor){
+        if (isEmpty()){
+            return false;
+        }
+        if (this.ele.getValor() == valor){
+            return true;
+        }
+        else {
+            if (valor < this.ele.getValor()){
+                if (this.esq == null){
+                    return false;
+                }                
+                else{
+                    return this.esq.busca(valor); // repassei a responsabilidade para a subarvore esquerda
+                }
+        }
+            else if (valor > this.ele.getValor()){
+                if (this.dir == null){
+                    return false;
+                }
+                else{
+                    return this.dir.busca(valor);
+                }
+            }
+            return false;
+        }
+    }
+    
+
 
     // gets e sets
     public void setElemento(Elemento ele) {

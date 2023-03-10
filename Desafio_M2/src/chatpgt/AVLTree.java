@@ -1,3 +1,4 @@
+package chatpgt;
 import java.util.Scanner;
 
 public class AVLTree {
