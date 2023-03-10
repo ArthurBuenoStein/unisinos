@@ -8,5 +8,7 @@ public class AppQueUsaArvore {
         arvore.inserir(new Elemento(12));
         arvore.inserir(new Elemento(18));
 
+        arvore.imprimirPreOrdem();
+
     }
 }

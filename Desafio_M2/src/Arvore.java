@@ -21,6 +21,18 @@ public class Arvore {
         return (this.ele == null);
     }
 
+    public void imprimirPreOrdem(){
+        if (!isEmpty()){
+            System.out.print(this.ele.getValor() + " ");
+            if (this.esq != null){
+                this.esq.imprimirPreOrdem();
+            }
+            if (this.dir != null){
+                this.dir.imprimirPreOrdem();
+            }
+        }
+    }
+
     public void inserir(Elemento novo){
         if(isEmpty()){
             this.ele = novo;
