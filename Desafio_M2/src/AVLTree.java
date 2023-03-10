@@ -107,4 +107,27 @@ public class AVLTree {
         }
 
         if (node == null) {
+
+        }
+    }
+
+    public void print(String prefix, boolean isLeft) {
+        if (right != null) {
+            right.print(prefix + (isLeft ? "│   " : "    "), false);
+        }
+        System.out.println(prefix + (isLeft ? "└── " : "┌── ") + key + "(" + balanceFactor + ")");
+        if (left != null) {
+            left.print(prefix + (isLeft ? "    " : "│   "), true);
+        }
+    }
+
+    public void print() {
+        if (root != null) {
+            root.print("", true);
+        }
+        System.out.println("-----------------------");
+    }
+}
+
+
            
