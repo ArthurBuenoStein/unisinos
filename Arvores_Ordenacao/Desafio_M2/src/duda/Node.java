@@ -1,7 +1,7 @@
 package duda; 
 
 public class Node {
-    int value;
+    protected int value;
     protected Node right = null;
     protected Node left = null;
 

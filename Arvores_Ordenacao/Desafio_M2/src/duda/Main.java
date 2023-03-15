@@ -8,6 +8,18 @@ public class Main {
 
     public static void main(String[] args) {
         int userSelectedOption;
+
+        // TODO remover, apenas para fins de testes!
+        // binaryTree.addValue(40);
+        // binaryTree.addValue(30);
+        // binaryTree.addValue(32);
+        // binaryTree.addValue(10);
+        // binaryTree.addValue(14);
+        // binaryTree.addValue(4);
+        // binaryTree.addValue(18);
+        // binaryTree.addValue(15);
+        // binaryTree.addValue(20);
+        
         do {
             Terminal.printMessageForTime("", 0);
             userSelectedOption = getUserSelectedOption();
@@ -53,12 +65,15 @@ public class Main {
     }
 
     public static void insertValue() {
+        System.out.println("Insira o valor que deseja adicionar:");
         int value = Teclado.leInt();
         binaryTree.addValue(value);
     }
 
     public static void deleteValue() {
-        System.out.println("Implementar o delete de um valor da árvore");
+        System.out.println("Insira o valor que deseja excluir:");
+        int value = Teclado.leInt();
+        binaryTree.deleteValue(value);
     }
 
     public static void printTree() {
