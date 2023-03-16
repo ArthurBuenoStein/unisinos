@@ -106,7 +106,7 @@ public class Tree {
     }
 
     public void printTreeValues() {
-        String strTreeValues = printTreeValuesR(this.root, "", "", "");
-        System.out.print(strTreeValues);
+        String strTree = printTreeValuesR(this.root, "", "", "");
+        System.out.print((strTree != null && !strTree.trim().isEmpty()) ? strTree : "Árvore vazia!");
     }
 }

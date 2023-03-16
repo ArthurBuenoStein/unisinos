@@ -70,20 +70,24 @@ public class Main {
         System.out.println("Insira o valor que deseja adicionar:");
         int value = Teclado.leInt();
         binaryTree.addValue(value);
+        System.out.println("\nValor inserido com sucesso:\n");
+        printTree();
     }
 
     public static void deleteValue() {
         System.out.println("Insira o valor que deseja excluir:");
         int value = Teclado.leInt();
         binaryTree.deleteValue(value);
+        System.out.println("\nValor removido com sucesso:\n");
+        printTree();
     }
 
     public static void searchValue() {
         System.out.println("Insira o valor que deseja verificar se já existe:");
         int value = Teclado.leInt();
         boolean treeContainsValue = binaryTree.containsNode(value);
-        System.out.println("Árvore " + (treeContainsValue ? "" : "não ") + "contém valor " + value);
-        printWaitToReturn();
+        System.out.println("Árvore " + (treeContainsValue ? "" : "não ") + "contém valor " + value + ":\n");
+        printTree();
     }
 
     public static void printTree() {
