@@ -4,21 +4,21 @@ import java.util.Scanner;
 public class Main {
     // TODO O melhor é declarar como global OU declarar dentro da função e passar como 
     // parâmetro para as demais OU cnetralizar as alterações dentro de uma única função?
-    static Tree binaryTree = new Tree();
+    static Tree avlTree = new Tree();
 
     public static void main(String[] args) {
         int userSelectedOption;
 
         // TODO remover, apenas para fins de testes!
-        // binaryTree.addValue(40);
-        // binaryTree.addValue(30);
-        // binaryTree.addValue(32);
-        // binaryTree.addValue(10);
-        // binaryTree.addValue(14);
-        // binaryTree.addValue(4);
-        // binaryTree.addValue(18);
-        // binaryTree.addValue(15);
-        // binaryTree.addValue(20);
+        // avlTree.addValue(40);
+        // avlTree.addValue(30);
+        // avlTree.addValue(32);
+        // avlTree.addValue(10);
+        // avlTree.addValue(14);
+        // avlTree.addValue(4);
+        // avlTree.addValue(18);
+        // avlTree.addValue(15);
+        // avlTree.addValue(20);
         
         do {
             Terminal.printMessageForTime("", 0);
@@ -69,7 +69,7 @@ public class Main {
     public static void insertValue() {
         System.out.println("Insira o valor que deseja adicionar:");
         int value = Teclado.leInt();
-        binaryTree.addValue(value);
+        avlTree.addValue(value);
         System.out.println("\nValor inserido com sucesso:\n");
         printTree();
     }
@@ -77,7 +77,7 @@ public class Main {
     public static void deleteValue() {
         System.out.println("Insira o valor que deseja excluir:");
         int value = Teclado.leInt();
-        binaryTree.deleteValue(value);
+        avlTree.deleteValue(value);
         System.out.println("\nValor removido com sucesso:\n");
         printTree();
     }
@@ -85,13 +85,13 @@ public class Main {
     public static void searchValue() {
         System.out.println("Insira o valor que deseja verificar se já existe:");
         int value = Teclado.leInt();
-        boolean treeContainsValue = binaryTree.containsNode(value);
+        boolean treeContainsValue = avlTree.containsNode(value);
         System.out.println("Árvore " + (treeContainsValue ? "" : "não ") + "contém valor " + value + ":\n");
         printTree();
     }
 
     public static void printTree() {
-        binaryTree.printTreeValues();
+        avlTree.printTreeValues();
         printWaitToReturn();
     }
 

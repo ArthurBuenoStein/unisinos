@@ -2,6 +2,7 @@ package duda;
 
 public class Node {
     protected int value;
+    protected int bFactor;
     protected Node right = null;
     protected Node left = null;
 

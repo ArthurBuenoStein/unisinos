@@ -30,11 +30,13 @@ public class Tree {
     private Node addValueR(int value, Node current) {
         if(current == null)
             return new Node(value);
-        if(value < current.value)
+        if(value < current.value) {
             current.left = addValueR(value, current.left);
-        else if(value > current.value)
+            current.bFactor = (current.left == null ? 0 : 1) + (current.right == null ? 0 : 1);
+        } else if(value > current.value) {
             current.right = addValueR(value, current.right);
-        else
+            current.bFactor = (current.left == null ? 0 : 1) + (current.right == null ? 0 : 1);
+        } else
             return current;
         return current;
     }
@@ -95,7 +97,7 @@ public class Tree {
         // TODO apenas para debug
         String childrenRString = node.right != null ? "" + node.right.value : ".";   
         String childrenLString = node.left !=null  ? "" + node.left.value : ".";   
-        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString + ")";    
+        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString + " F: " + node.bFactor +")";    
 
         str = str + tab + arc + node.value + nodeInfo + "\n";
         tab = tab + "|   ";
