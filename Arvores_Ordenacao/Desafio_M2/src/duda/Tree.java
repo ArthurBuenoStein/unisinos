@@ -73,6 +73,21 @@ public class Tree {
         return current.right == null ? current : getMaxNode(current.right);
     }
 
+    public boolean containsNode(int value) {
+        return containsNodeR(value, root);
+    }
+
+    private boolean containsNodeR(int value, Node current) {
+        if (current == null)
+            return false;
+        if (value == current.value)
+            return true;
+
+        return value < current.value
+          ? containsNodeR(value, current.left)
+          : containsNodeR(value, current.right);
+    }
+
     public String printTreeValuesR(Node node, String str, String arc, String tab) {
         if(node == null)
             return str;

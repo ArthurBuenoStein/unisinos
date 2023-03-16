@@ -34,12 +34,13 @@ public class Main {
                     deleteValue();
                     break;
                 case 3:
-                    printTree();
+                    searchValue();
                     break;
                 case 4:
-                break;
+                    printTree();
+                    break;
             }
-        } while (userSelectedOption != 4);
+        } while (userSelectedOption != 5);
     }
 
     public static String menuUser() {
@@ -47,8 +48,9 @@ public class Main {
         menu += "\nDigite a opção que desejar: ";
         menu += "\n1. Inserir valor";
         menu += "\n2. Remover valor";
-        menu += "\n3. Imprimir árvore";
-        menu += "\n4. Sair";
+        menu += "\n3. Buscar valor";
+        menu += "\n4. Imprimir árvore";
+        menu += "\n5. Sair";
         return menu;
     }
 
@@ -57,10 +59,10 @@ public class Main {
         System.out.println(menuUser());
         do {
             userSelectedOption = Teclado.leInt();
-            if (userSelectedOption > 4 || userSelectedOption < 1) {
+            if (userSelectedOption > 5 || userSelectedOption < 1) {
                 System.out.println("\nValor inválido. Tente novamente!");
             }
-        } while (userSelectedOption > 4 || userSelectedOption < 1);
+        } while (userSelectedOption > 5 || userSelectedOption < 1);
         return userSelectedOption;
     }
 
@@ -76,9 +78,21 @@ public class Main {
         binaryTree.deleteValue(value);
     }
 
+    public static void searchValue() {
+        System.out.println("Insira o valor que deseja verificar se já existe:");
+        int value = Teclado.leInt();
+        boolean treeContainsValue = binaryTree.containsNode(value);
+        System.out.println("Árvore " + (treeContainsValue ? "" : "não ") + "contém valor " + value);
+        printWaitToReturn();
+    }
+
     public static void printTree() {
-        int back;
         binaryTree.printTreeValues();
+        printWaitToReturn();
+    }
+
+    public static void printWaitToReturn() {
+        int back;
         System.out.println("\nPara retornar, digite 0:");
         do {
             back = Teclado.leInt();
