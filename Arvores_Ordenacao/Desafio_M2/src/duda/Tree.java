@@ -78,15 +78,12 @@ public class Tree {
             return str;
 
         // TODO apenas para debug
-        // Node childrenR = node.right;
-        // Node childrenL = node.left;
-        // String childrenRString = childrenR != null ? "" + childrenR.value : ".";   
-        // String childrenLString = childrenL !=null  ? "" + childrenL.value : ".";   
-        String childrens = ""; //"(R:" + childrenRString + " L:" + childrenLString + ")";    
+        String childrenRString = node.right != null ? "" + node.right.value : ".";   
+        String childrenLString = node.left !=null  ? "" + node.left.value : ".";   
+        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString + ")";    
 
-        str = str + tab + arc + node.value + childrens + "\n";
+        str = str + tab + arc + node.value + nodeInfo + "\n";
         tab = tab + "|   ";
-        
         
         str = printTreeValuesR(node.left, str, "|---", tab);
         str = printTreeValuesR(node.right, str, "|---", tab);
