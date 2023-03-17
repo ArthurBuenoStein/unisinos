@@ -6,11 +6,15 @@ public class AppQueUsaArvore {
         Scanner teclado = new Scanner(System.in);
 
         ArvoreAVL arvore = new ArvoreAVL(new Elemento(teclado.nextInt()));
+        arvore.calcularBalanceamento();
+        arvore = arvore.verificaBalanceamento();
         System.out.println(arvore.printArvoreAVL(0));
 
         while(true){
-            arvore.inserir(new Elemento(teclado.nextInt()));
-            System.out.println(arvore.printArvoreAVL(0));
+           arvore = arvore.inserir(new Elemento(teclado.nextInt()));
+            arvore.calcularBalanceamento();
+            arvore = arvore.verificaBalanceamento();
+           System.out.println(arvore.printArvoreAVL(0));
         }
     }
 }
