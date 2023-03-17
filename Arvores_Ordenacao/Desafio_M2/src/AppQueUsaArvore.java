@@ -2,7 +2,7 @@ public class AppQueUsaArvore {
     public static void main(String[] args) {
 
         Elemento elem = new Elemento(0);
-        Arvore arvore = new Arvore(new Elemento(8));
+        ArvoreAVL arvore = new ArvoreAVL(new Elemento(8));
         arvore.inserir(new Elemento(5));
         arvore.inserir(new Elemento(1));
         arvore.inserir(new Elemento(7));
