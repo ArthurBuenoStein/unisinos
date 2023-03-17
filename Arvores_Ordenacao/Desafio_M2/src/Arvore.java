@@ -16,6 +16,52 @@ public class Arvore {
         // System.out.println("Criei a Árvore com o elemento "+ele.getValor());
     }
 
+    // Remoção do nó da árvore
+
+    public Arvore remover(Elemento ele) {
+        // Primeiro caso - encontre elemento
+        if (this.ele.getValor() == ele.getValor()){
+            // caso mais simples - o elemento está em um nó folha
+            if (this.dir == null && this.esq == null){
+                return null;
+            }
+            else{
+                 // tem filhos a esquerda, porém não tem a direita
+                if (this.esq != null && this.dir == null){
+                    return this.esq;
+                }
+                // tenho filhos à direita e não tenho à esquerda.
+                else if (this.dir != null && this.esq == null){
+                    return this.dir;
+                }
+                // possuo filhos dos dois lados;
+                else{
+                    // adotar a estratégia do maior entre os menores.
+                    Arvore aux = this.esq;
+                    while (aux.dir != null){ // enquanto ouvir filhos à direita
+                        aux = aux.dir;
+                    }
+                    // troco os elementos da árvore
+                    this.ele = aux.getElemento(); // o nó atual recebe o elemento do aux
+                    // o maior dentre os menores
+                    aux.setElemento(ele); // insiro no nó folha, o elemento a ser eleminido;
+
+                    this.esq = esq.remover(ele);
+
+                }
+            }
+        }
+        else if (ele.getValor() < this.ele.getValor()){
+            // Delegar a responsabilidade da sub árvore da esquerda
+            this.esq = this.esq.remover(ele);
+        }
+        else if (ele.getValor() > this.ele.getValor()){
+            // Delegar a responsabilidade da sub árvore da direita
+            this.dir = this.dir.remover(ele);
+        }
+        return this;
+    }
+
     // métodos de controle;
     public boolean isEmpty(){
         return (this.ele == null);
@@ -30,6 +76,45 @@ public class Arvore {
             if (this.dir != null){
                 this.dir.imprimirPreOrdem();
             }
+        }
+    }
+
+    public void imprimirInOrdem(){
+        if (!isEmpty()){
+            
+            if (this.esq != null){
+                this.esq.imprimirInOrdem();
+            }
+            System.out.print(this.ele.getValor() + " ");
+            if (this.dir != null){
+                this.dir.imprimirInOrdem();
+            }
+        }
+    }
+
+    public void imprimirInOrdemInversa(){
+        if (!isEmpty()){
+            
+            if (this.dir != null){
+                this.dir.imprimirInOrdemInversa();
+            }
+            System.out.print(this.ele.getValor() + " ");
+            if (this.esq != null){
+                this.esq.imprimirInOrdemInversa();
+            }
+            
+        }
+    }
+
+    public void imprimirPosOrdem(){
+        if (!isEmpty()){
+            if (this.dir != null){
+                this.dir.imprimirPosOrdem();
+            }
+            if (this.esq != null){
+                this.esq.imprimirPosOrdem();
+            }
+            System.out.print(this.ele.getValor() + " ");
         }
     }
 

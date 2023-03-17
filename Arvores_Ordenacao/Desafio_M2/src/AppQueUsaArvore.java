@@ -1,14 +1,24 @@
 public class AppQueUsaArvore {
     public static void main(String[] args) {
-        Arvore arvore = new Arvore(new Elemento(10));
+
+        Elemento elem = new Elemento(0);
+        Arvore arvore = new Arvore(new Elemento(8));
         arvore.inserir(new Elemento(5));
         arvore.inserir(new Elemento(1));
-        arvore.inserir(new Elemento(8));
+        arvore.inserir(new Elemento(7));
         arvore.inserir(new Elemento(15));
         arvore.inserir(new Elemento(12));
         arvore.inserir(new Elemento(18));
 
-        arvore.imprimirPreOrdem();
+       arvore.imprimirInOrdem();
+       
+       elem.setValor(8);
+       arvore.remover(elem);
+       System.out.println("");
 
+       arvore.imprimirInOrdem();
+
+
+       
     }
 }
