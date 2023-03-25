@@ -2,9 +2,8 @@ package duda;
 
 public class Node {
     protected int value;
-    protected int bFactor;
-    protected Node right = null;
-    protected Node left = null;
+    protected Tree right = null;
+    protected Tree left = null;
 
     public Node(int value) {
         this.value = value;
@@ -14,11 +13,11 @@ public class Node {
         return value;
     }
 
-    public Node getRight() {
+    public Tree getRight() {
         return right;
     }
 
-    public Node getLeft() {
+    public Tree getLeft() {
         return left;
     }
 
@@ -26,11 +25,11 @@ public class Node {
         this.value = value;
     }
 
-    public void setRight(Node right) {
+    public void setRight(Tree right) {
         this.right = right;
     }
 
-    public void setLeft(Node left) {
+    public void setLeft(Tree left) {
         this.left = left;
     }
 }

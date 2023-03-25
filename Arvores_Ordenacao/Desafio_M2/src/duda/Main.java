@@ -10,15 +10,16 @@ public class Main {
         int userSelectedOption;
 
         // TODO remover, apenas para fins de testes!
-        // avlTree.addValue(40);
-        // avlTree.addValue(30);
-        // avlTree.addValue(32);
-        // avlTree.addValue(10);
-        // avlTree.addValue(14);
-        // avlTree.addValue(4);
-        // avlTree.addValue(18);
-        // avlTree.addValue(15);
+        // avlTree.addValue(50);
+        // avlTree.addValue(7);
         // avlTree.addValue(20);
+        // avlTree.addValue(39);
+        // avlTree.addValue(22);
+        // avlTree.addValue(45);
+        // avlTree.addValue(76);
+        // avlTree.addValue(64);
+        // avlTree.addValue(59);
+        // avlTree.addValue(87);
         
         do {
             Terminal.printMessageForTime("", 0);
@@ -70,7 +71,6 @@ public class Main {
         System.out.println("Insira o valor que deseja adicionar:");
         int value = Teclado.leInt();
         avlTree.addValue(value);
-        System.out.println("\nValor inserido com sucesso:\n");
         printTree();
     }
 
@@ -78,7 +78,6 @@ public class Main {
         System.out.println("Insira o valor que deseja excluir:");
         int value = Teclado.leInt();
         avlTree.deleteValue(value);
-        System.out.println("\nValor removido com sucesso:\n");
         printTree();
     }
 

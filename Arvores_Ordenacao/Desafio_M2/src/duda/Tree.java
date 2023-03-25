@@ -1,114 +1,137 @@
 package duda; 
 public class Tree {
     private Node root = null;
-    // private int height;
+    private int height;
 
-    public Tree() {
+    public Tree() {}
 
+    public Tree(Node root) {
+        this.root = root;
+    }
+
+    public Tree(Node root, int height) {
+        this.root = root;
+        this.height = height;
     }
 
     public Node getRoot() {
         return root;
     }
 
-    // public int getHeight() {
-    //     return height;
-    // }
-
     public void setRoot(Node root) {
         this.root = root;
     }
 
-    // public void setHeight(int height) {
-    //     this.height = height;
-    // }
-
-    public void addValue(int value) {
-        root = addValueR(value, root);
+    public int getHeight() {
+        return height;
     }
 
-    private Node addValueR(int value, Node current) {
-        if(current == null)
-            return new Node(value);
-        if(value < current.value) {
-            current.left = addValueR(value, current.left);
-            current.bFactor = (current.left == null ? 0 : 1) + (current.right == null ? 0 : 1);
-        } else if(value > current.value) {
-            current.right = addValueR(value, current.right);
-            current.bFactor = (current.left == null ? 0 : 1) + (current.right == null ? 0 : 1);
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void addValue(int value) {
+        if(containsNode(value)) {
+            System.out.println("\nValor já existente na árvore!\n");
+            return;
+        }
+        root = addValueR(value, this, 0).root;
+        System.out.println("\nValor inserido com sucesso:\n");
+    }
+
+    private Tree addValueR(int value, Tree current, int level) {
+        if(current == null || current.root == null)
+            return new Tree(new Node(value), level);
+        if(value < current.root.value) {
+            current.root.left = addValueR(value, current.root.left, current.height+1);
+        } else if(value > current.root.value) {
+            current.root.right = addValueR(value, current.root.right, current.height+1);
         } else
             return current;
         return current;
     }
 
     public void deleteValue(int value) {
-        root = deleteValueR(value, root);
+        if(!containsNode(value)) {
+            System.out.println("\nValor não existente na árvore!\n");
+            return;
+        }
+
+        Tree actualRootTree = deleteValueR(value, this);
+        root = actualRootTree != null ? actualRootTree.root : null;
+        System.out.println("\nValor removido com sucesso:\n");
     }
 
-    private Node deleteValueR(int value, Node current) {
+    private Tree deleteValueR(int value, Tree current) {
         if(current == null)
             return null;
 
-        if(value > current.value) {
-            current.right = deleteValueR(value, current.right);
+        if(value > current.root.value) {
+            current.root.right = deleteValueR(value, current.root.right);
             return current;
-        } else if (value < current.value) {
-            current.left = deleteValueR(value, current.left);
+        } else if (value < current.root.value) {
+            current.root.left = deleteValueR(value, current.root.left);
             return current;
-        } else {
-            if (current.left == null && current.right == null)
+        }
+        else {
+            if (current.root.left == null && current.root.right == null)
                 return null;
-            if (current.right == null)
-                return current.left;
-            if (current.left == null)
-                return current.right;
+            if (current.root.right == null)
+                return current.root.left;
+            if (current.root.left == null)
+                return current.root.right;
 
-            Node maxNodeForLeft = getMaxNode(current.left);
-            current = deleteValueR(maxNodeForLeft.value, current);
-            maxNodeForLeft.right = current.right;
-            maxNodeForLeft.left = current.left;
+            Tree maxNodeForLeft = getMaxNode(current.root.left);
+            current = deleteValueR(maxNodeForLeft.root.value, current);
+            maxNodeForLeft.root.right = current.root.right;
+            maxNodeForLeft.root.left = current.root.left;
             return maxNodeForLeft;
         }
     }
 
-    private Node getMaxNode(Node current) {
-        return current.right == null ? current : getMaxNode(current.right);
+    private Tree getMaxNode(Tree current) {
+        return (current.root == null || current.root.right == null) 
+            ? current : getMaxNode(current.root.right);
     }
 
     public boolean containsNode(int value) {
-        return containsNodeR(value, root);
+        return containsNodeR(value, this);
     }
 
-    private boolean containsNodeR(int value, Node current) {
-        if (current == null)
+    private boolean containsNodeR(int value, Tree current) {
+        if (current == null || current.root == null)
             return false;
-        if (value == current.value)
+        if (value == current.root.value)
             return true;
 
-        return value < current.value
-          ? containsNodeR(value, current.left)
-          : containsNodeR(value, current.right);
-    }
-
-    public String printTreeValuesR(Node node, String str, String arc, String tab) {
-        if(node == null)
-            return str;
-
-        // TODO apenas para debug
-        String childrenRString = node.right != null ? "" + node.right.value : ".";   
-        String childrenLString = node.left !=null  ? "" + node.left.value : ".";   
-        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString + " F: " + node.bFactor +")";    
-
-        str = str + tab + arc + node.value + nodeInfo + "\n";
-        tab = tab + "|   ";
-        
-        str = printTreeValuesR(node.left, str, "|---", tab);
-        str = printTreeValuesR(node.right, str, "|---", tab);
-        return str;
+        return value < current.root.value
+          ? containsNodeR(value, current.root.left)
+          : containsNodeR(value, current.root.right);
     }
 
     public void printTreeValues() {
-        String strTree = printTreeValuesR(this.root, "", "", "");
-        System.out.print((strTree != null && !strTree.trim().isEmpty()) ? strTree : "Árvore vazia!");
+        if(this.root == null)
+            System.out.println("Árvore vazia!");
+        else
+            this.printTreeValues(0);
+    }
+
+    private void printTreeValues(int level) {
+        String tab = "";
+        String childrenRString = this.root.right != null ? "" + this.root.right.root.value : ".";   
+        String childrenLString = this.root.left !=null  ? "" + this.root.left.root.value : ".";   
+        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString +")";
+
+        for(int i = 0; i < level; i++)
+            tab += "|   ";
+        if(level > 0)
+            tab += "|---"; 
+
+        System.out.println(tab + this.root.getValue() + nodeInfo);
+
+        if(this.root.left != null)
+            this.root.left.printTreeValues(level+1);
+        if(this.root.right != null)
+            this.root.right.printTreeValues(level+1);
     }
 }
