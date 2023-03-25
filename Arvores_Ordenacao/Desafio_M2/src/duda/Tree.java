@@ -1,7 +1,7 @@
 package duda; 
 public class Tree {
     private Node root = null;
-    private int height;
+    private int height = 1;
 
     public Tree() {}
 
@@ -41,14 +41,21 @@ public class Tree {
 
     private Tree addValueR(int value, Tree current, int level) {
         if(current == null || current.root == null)
-            return new Tree(new Node(value), level);
+            return new Tree(new Node(value));
         if(value < current.root.value) {
             current.root.left = addValueR(value, current.root.left, current.height+1);
         } else if(value > current.root.value) {
             current.root.right = addValueR(value, current.root.right, current.height+1);
-        } else
-            return current;
+        }
+        current.height = this.calculateHeight(current);
         return current;
+    }
+
+    public int calculateHeight(Tree current) {
+        int rightHeight = current.root.right == null ? 0 : current.root.right.height;
+        int leftHeight = current.root.left == null ? 0 : current.root.left.height;
+        int biggestHeight = rightHeight > leftHeight ? rightHeight : leftHeight;
+        return biggestHeight + 1;
     }
 
     public void deleteValue(int value) {
@@ -66,13 +73,10 @@ public class Tree {
         if(current == null)
             return null;
 
-        if(value > current.root.value) {
+        if(value > current.root.value)
             current.root.right = deleteValueR(value, current.root.right);
-            return current;
-        } else if (value < current.root.value) {
+        else if (value < current.root.value)
             current.root.left = deleteValueR(value, current.root.left);
-            return current;
-        }
         else {
             if (current.root.left == null && current.root.right == null)
                 return null;
@@ -85,8 +89,11 @@ public class Tree {
             current = deleteValueR(maxNodeForLeft.root.value, current);
             maxNodeForLeft.root.right = current.root.right;
             maxNodeForLeft.root.left = current.root.left;
-            return maxNodeForLeft;
+            current = maxNodeForLeft;   
         }
+
+        current.height = this.calculateHeight(current);
+        return current;
     }
 
     private Tree getMaxNode(Tree current) {
@@ -118,9 +125,9 @@ public class Tree {
 
     private void printTreeValues(int level) {
         String tab = "";
-        String childrenRString = this.root.right != null ? "" + this.root.right.root.value : ".";   
-        String childrenLString = this.root.left !=null  ? "" + this.root.left.root.value : ".";   
-        String nodeInfo = " (R:" + childrenRString + " L:" + childrenLString +")";
+        String childrenRString = this.root.right != null ? "" + this.root.right.root.value : "-";   
+        String childrenLString = this.root.left !=null  ? "" + this.root.left.root.value : "-";   
+        String nodeInfo = " [R:" + childrenRString + " | L:" + childrenLString + " | H:" + this.height + "]";
 
         for(int i = 0; i < level; i++)
             tab += "|   ";
