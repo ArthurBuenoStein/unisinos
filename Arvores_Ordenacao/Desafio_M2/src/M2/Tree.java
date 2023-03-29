@@ -194,6 +194,8 @@ public class Tree {
         Tree grandchildrenRByL = childrenL.root.right;
         childrenL.root.right = t;
         t.root.left = grandchildrenRByL;
+        updateHeight(childrenL);
+        updateHeight(t);
         return childrenL;
     }
 
@@ -203,6 +205,8 @@ public class Tree {
         Tree grandchildrenLByR = childrenR.root.left;
         childrenR.root.left = t;
         t.root.right = grandchildrenLByR;
+        updateHeight(childrenR);
+        updateHeight(t);
         return childrenR;
     }
 }
