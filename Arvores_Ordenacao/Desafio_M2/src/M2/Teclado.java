@@ -1,4 +1,4 @@
-package duda;
+package M2;
 
 import java.io.*;
 

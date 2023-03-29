@@ -1,4 +1,4 @@
-package duda;
+package M2;
 
 public class Tree {
     private Node root = null;
@@ -45,11 +45,10 @@ public class Tree {
 
     private void printTreeValues(int level) {
         String tab = "";
-        // String childrenRString = this.root.right != null ? "" + this.root.right.root.value : "-";
-        // String childrenLString = this.root.left != null ? "" + this.root.left.root.value : "-";
-        String nodeInfo = "";
-            /*" [R:" + childrenRString + " | L:" + childrenLString 
-            + " | H:" + this.height + " | BF:" + this.balanceFactor +  "]"; */
+        String childrenRString = this.root.right != null ? "" + this.root.right.root.value : "-";
+        String childrenLString = this.root.left != null ? "" + this.root.left.root.value : "-";
+        String nodeInfo = " [R:" + childrenRString + " | L:" + childrenLString + "]";
+            // + " | H:" + this.height + " | BF:" + this.balanceFactor +  "]"; 
 
         for (int i = 0; i < level; i++)
             tab += "|   ";
@@ -191,6 +190,7 @@ public class Tree {
 
     private Tree rotateRight(Tree t) {
         Tree childrenL = t.root.left;
+        if(childrenL == null) return t;
         Tree grandchildrenRByL = childrenL.root.right;
         childrenL.root.right = t;
         t.root.left = grandchildrenRByL;
@@ -199,6 +199,7 @@ public class Tree {
 
     private Tree rotateLeft(Tree t) {
         Tree childrenR = t.root.right;
+        if(childrenR == null) return t;
         Tree grandchildrenLByR = childrenR.root.left;
         childrenR.root.left = t;
         t.root.right = grandchildrenLByR;

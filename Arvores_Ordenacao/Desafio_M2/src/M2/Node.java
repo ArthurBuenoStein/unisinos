@@ -1,4 +1,4 @@
-package duda; 
+package M2; 
 
 public class Node {
     protected int value;

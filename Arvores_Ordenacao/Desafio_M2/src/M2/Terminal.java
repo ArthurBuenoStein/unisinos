@@ -1,4 +1,4 @@
-package duda;
+package M2;
 
 // Eduarda Vargas dos Santos - Prova GB
 // Classe Terminal

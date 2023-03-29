@@ -1,32 +1,16 @@
-package duda;
+package M2;
 import java.util.Scanner;
 
 public class Main {
-    // TODO O melhor é declarar como global OU declarar dentro da função e passar como 
-    // parâmetro para as demais OU cnetralizar as alterações dentro de uma única função?
     static Tree avlTree = new Tree();
-
     public static void main(String[] args) {
         int userSelectedOption;
-
-        // TODO remover, apenas para fins de testes!
-        // avlTree.addValue(50);
-        // avlTree.addValue(7);
-        // avlTree.addValue(20);
-        // avlTree.addValue(39);
-        // avlTree.addValue(22);
-        // avlTree.addValue(45);
-        // avlTree.addValue(76);
-        // avlTree.addValue(64);
-        // avlTree.addValue(59);
-        // avlTree.addValue(87);
         
         do {
             Terminal.printMessageForTime("", 0);
             userSelectedOption = getUserSelectedOption();
             Terminal.printMessageForTime("", 0);
 
-            // TODO tratar para não adicionar valores invalidos (ex: string em numero)
             switch(userSelectedOption) {
                 case 1:
                     insertValue();
